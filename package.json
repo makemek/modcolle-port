@@ -1,0 +1,11 @@
+{
+  "name": "modcolle-port",
+  "version": "0.0.0",
+  "description": "microservice for calculating api_port value server side",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Apipol Niyomsak <makemek101@hotmail.com>",
+  "license": "MIT"
+}
