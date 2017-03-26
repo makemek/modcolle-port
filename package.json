@@ -2,15 +2,17 @@
   "name": "modcolle-port",
   "version": "0.0.0",
   "description": "microservice for calculating api_port value server side",
-  "main": "index.js",
+  "author": "Apipol Niyomsak <makemek101@hotmail.com>",
+  "license": "MIT",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
     "eslint": "eslint **/*.js",
     "test": "npm run eslint"
   },
-  "author": "Apipol Niyomsak <makemek101@hotmail.com>",
-  "license": "MIT",
+  "dependencies": {
+    "seneca": "^3.3.0"
+  },
   "devDependencies": {
     "eslint": "^3.18.0",
     "eslint-config-modcolle": "^0.1.0",
