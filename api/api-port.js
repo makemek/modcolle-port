@@ -5,7 +5,7 @@ const ETIMEOUT = process.env.ETIMEOUT
 const Emitter = require('../util/emitter')
 const emitter = new Emitter()
 
-module.exports = function(options) {
+module.exports = function() {
   this.add({role: 'api_port', cmd: 'calculate'}, calculate)
   this.add({role: 'api_port', cmd: 'done'}, done)
 }
