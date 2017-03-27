@@ -4,6 +4,7 @@
   "description": "microservice for calculating api_port value server side",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "eslint": "eslint **/*.js",
     "test": "npm run eslint"
