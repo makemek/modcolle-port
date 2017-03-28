@@ -1,3 +1,6 @@
+*.swf
+flashplayer*
+
 #logs
 logs
 *.log

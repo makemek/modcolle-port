@@ -10,7 +10,7 @@ class Emitter extends EventEmitter {
   * Reason: To clear out untriggered events from piling up
   **/
   eventTimeout(targetEvent, millesecs) {
-    setTimeout(() => this.removeAllListeners(targetEvent), millesecs)
+    return setTimeout(() => this.removeAllListeners(targetEvent), millesecs)
   }
 
 }

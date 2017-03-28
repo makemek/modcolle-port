@@ -1,6 +1,7 @@
 'use strict'
 
-const TIMEOUT = 5 * 1000
+const TIMEOUT = parseInt(process.env.ETIMEOUT)
+const PORT = process.env.PORT
 const seneca = require('seneca')({
   log: 'silent',
   timeout: TIMEOUT
@@ -15,7 +16,10 @@ describe('api_port', () => {
     seneca.actAsync = Promise.promisify(seneca.act, {context: seneca})
     seneca
     .use(apiPort)
-    .ready(done)
+    .ready(() => {
+      seneca.listen({port: PORT})
+      done()
+    })
   })
 
   it(`should calculate value of api_port before seneca timeout ${TIMEOUT}ms`, () => {
@@ -25,6 +29,7 @@ describe('api_port', () => {
     .then(result => {
       const {api_port} = result
       should.exist(api_port)
+      should(api_port).not.be.empty()
       should(api_port.match(/[^0-9]/)).be.Null()
     })
   }).timeout(TIMEOUT + 50)
