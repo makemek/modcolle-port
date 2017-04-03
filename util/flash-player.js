@@ -2,6 +2,7 @@
 
 const ETIMEOUT = process.env.ETIMEOUT
 
+const debug = require('debug')('modcolle:port')
 const path = require('path')
 const querystring = require('querystring')
 const execFile = require('child_process').execFile
@@ -17,7 +18,7 @@ class FlashPlayer {
   execute(swf, flashvars) {
     swf = path.resolve(swf)
     flashvars = querystring.stringify(flashvars)
-    console.log(this.player, swf, flashvars)
+    debug(`Spawn: ${this.player} file://${swf}?${flashvars}`)
     return execFile(this.player, [`file://${swf}?${flashvars}`], this.options)
   }
 }

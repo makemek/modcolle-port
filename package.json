@@ -15,6 +15,7 @@
     "test": "npm run eslint && npm run ftest"
   },
   "dependencies": {
+    "debug": "^2.6.3",
     "seneca": "^3.3.0"
   },
   "devDependencies": {

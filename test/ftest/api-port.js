@@ -2,7 +2,6 @@
 
 const TIMEOUT = parseInt(process.env.ETIMEOUT)
 const PORT = process.env.PORT
-console.log(TIMEOUT, PORT)
 const seneca = require('seneca')({
   log: 'silent',
   timeout: TIMEOUT
