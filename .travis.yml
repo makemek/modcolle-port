@@ -1,0 +1,44 @@
+sudo: false
+
+language: node_js
+node_js:
+  - "6"
+  - "5"
+
+addons:
+  apt:
+    packages:
+    - libnss3
+    - libgtk2.0-0
+    - xvfb
+    - oracle-java8-installer
+    - oracle-java8-set-default
+    - unzip
+    - python
+
+before_install:
+  - wget -qO- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/external/
+  - wget -q https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version10.0.0/ffdec_10.0.0.zip -O /tmp/ffdec_10.0.0.zip
+  - wget -q https://fpdownload.macromedia.com/get/flashplayer/updaters/25/playerglobal25_0.swc -O /tmp/playerglobal25_0.swc
+  - wget -q http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.6.zip -O /tmp/flex_sdk_4.6.zip
+  - wget -q https://gist.githubusercontent.com/makemek/306ef8e02bb5dd2d21a8e1cfd89cec12/raw/0b50a880c34cfd1b473395b32412f3455d9d4a4f/core-decode.py -O /tmp/core-decode.py
+  - wget -q http://203.104.209.71/kcs/Core.swf -O /tmp/Core.swf
+  - mkdir -p /tmp/flex-sdk /tmp/ffdec ~/.FFDec ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/
+
+install:
+  - unzip -q /tmp/flex_sdk_4.6.zip -d /tmp/flex-sdk
+  - unzip -q /tmp/ffdec_10.0.0.zip -d /tmp/ffdec
+  - cp $TRAVIS_BUILD_DIR/external/config.bin ~/.FFDec/config.bin
+  - cp $TRAVIS_BUILD_DIR/external/settings.sol ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/settings.sol
+  - python /tmp/core-decode.py /tmp/Core.swf /tmp/decoded.swf
+  - java -jar /tmp/ffdec/ffdec.jar -importScript /tmp/decoded.swf $TRAVIS_BUILD_DIR/external/Core.swf $TRAVIS_BUILD_DIR/external/as3-import
+
+before_script:
+  - ls -al $TRAVIS_BUILD_DIR/external/
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+  - travis_retry npm install
+
+script:
+  - PORT=5000 ETIMEOUT=5000 npm run ftest

@@ -26,6 +26,8 @@ function calculate({memberId, meta$: {id}}, respond) {
     memberId,
     callbackUrl: escape(`http://127.0.0.1:${PORT}/act?`) + querystring.stringify(urlCallbackArgs)
   })
+  flash.stdout.on('data', console.log)
+  flash.stderr.on('data', console.log)
   flash.on('close', () => {
     emitter.removeAllListeners(id)
     clearTimeout(timeout)

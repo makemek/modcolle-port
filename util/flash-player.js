@@ -17,7 +17,8 @@ class FlashPlayer {
   execute(swf, flashvars) {
     swf = path.resolve(swf)
     flashvars = querystring.stringify(flashvars)
-    return execFile(this.player, [`${swf}?${flashvars}`], this.options)
+    console.log(this.player, swf, flashvars)
+    return execFile(this.player, [`file://${swf}?${flashvars}`], this.options)
   }
 }
 
