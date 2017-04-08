@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "debug": "^2.6.3",
+    "moment-timezone": "^0.5.13",
     "seneca": "^3.3.0"
   },
   "devDependencies": {

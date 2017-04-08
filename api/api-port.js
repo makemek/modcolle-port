@@ -7,6 +7,7 @@ const debug = require('debug')('modcolle:port')
 const querystring = require('querystring')
 const FlashPlayer = require('../util/flash-player')
 const Emitter = require('../util/emitter')
+const serverTime = require('../util/server-time')
 
 const emitter = new Emitter()
 const flashPlayer = new FlashPlayer()
@@ -26,6 +27,7 @@ function calculate({memberId, meta$: {id}}, respond) {
   urlCallbackArgs.id = id
   const flash = flashPlayer.execute('external/Core.swf', {
     memberId,
+    unixtime: serverTime.now('Asia/Tokyo'),
     callbackUrl: escape(`http://127.0.0.1:${PORT}/act?`) + querystring.stringify(urlCallbackArgs)
   })
   flash.stdout.on('data', debug)
