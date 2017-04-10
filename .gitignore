@@ -1,5 +1,6 @@
 *.swf
 flashplayer*
+!flashplayer/
 
 #logs
 logs
