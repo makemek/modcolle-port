@@ -3,6 +3,7 @@ FROM node:6-slim
 LABEL maintainer "Apipol Niyomsak"
 
 ENV DEPLOY_DIR=/var/www/modcolle-port \
+    DEPLOY_PORT=5000 \
     FLEX_DIR=/tmp/flex-sdk \
     FFDEC_DIR=/tmp/ffdec \
 
@@ -85,11 +86,14 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | te
       /usr/local/lib/ \
       /usr/local/bin/
 
+EXPOSE ${DEPLOY_PORT}
+
 # Setup Application
 WORKDIR ${DEPLOY_DIR}
 USER ${USER}
-RUN service xvfb start && \
+RUN chmod +x ./build/docker-entrypoint.sh && \
 
     npm install --only=production -g pm2 && \
-    npm install --only=production && \
-    pm2-docker start process.yml --env production --auto-exit
+    npm install --only=production
+
+ENTRYPOINT ["./build/docker-entrypoint.sh"]
