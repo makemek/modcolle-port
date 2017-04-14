@@ -13,6 +13,8 @@ ENV DEPLOY_DIR=/var/www/modcolle-port \
     # xvfb arguments required to start xvfb as a service successfully
     DISPLAY=:99
 
+ADD . $DEPLOY_DIR
+
 # install FFDec with -importScript support
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
@@ -33,21 +35,19 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | te
       # require to deploy this app
       wget \
       unzip \
-      git \
       python && \
     mkdir -p \
       $FLEX_DIR \
       $FFDEC_DIR && \
+
+    # Install Adobe Flash Player
+    wget -O- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $DEPLOY_DIR/external/ && \
 
     # Install FFDec
     wget https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version10.0.0/ffdec_10.0.0.zip -O /tmp/ffdec_10.0.0.zip && \
     unzip /tmp/ffdec_10.0.0.zip -d $FFDEC_DIR && \
     rm /tmp/ffdec_10.0.0.zip && \
     wget -q https://fpdownload.macromedia.com/get/flashplayer/updaters/25/playerglobal25_0.swc -O /tmp/playerglobal25_0.swc && \
-
-    # Prepare Deploying Application
-    git clone -b deploy-docker https://github.com/makemek/modcolle-port.git $DEPLOY_DIR && \
-    wget -O- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $DEPLOY_DIR/external/ && \
 
     # Configure FFDec
     cp -r $DEPLOY_DIR/.FFDec /root && \
