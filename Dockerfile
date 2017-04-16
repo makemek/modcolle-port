@@ -41,7 +41,7 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | te
       $FFDEC_DIR && \
 
     # Install Adobe Flash Player
-    wget -O- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $DEPLOY_DIR/external/ && \
+    wget -O- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $DEPLOY_DIR/bin/ && \
 
     # Install FFDec
     wget https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version10.0.0/ffdec_10.0.0.zip -O /tmp/ffdec_10.0.0.zip && \
@@ -64,7 +64,7 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | te
     wget http://203.104.209.71/kcs/Core.swf -O /tmp/Core.swf && \
     python $DEPLOY_DIR/build/core-decode.py /tmp/Core.swf /tmp/decoded.swf && \
     java -jar $FFDEC_DIR/ffdec.jar -decompress /tmp/decoded.swf /tmp/decoded-decompressed.swf && \
-    java -jar $FFDEC_DIR/ffdec.jar -importScript /tmp/decoded-decompressed.swf $DEPLOY_DIR/external/Core.swf $DEPLOY_DIR/build/as3-import && \
+    java -jar $FFDEC_DIR/ffdec.jar -importScript /tmp/decoded-decompressed.swf $DEPLOY_DIR/bin/Core.swf $DEPLOY_DIR/build/as3-import && \
     rm /tmp/*.swf && \
 
     # Clean up

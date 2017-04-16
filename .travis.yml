@@ -16,7 +16,7 @@ addons:
     - python
 
 before_install:
-  - wget -qO- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/external/
+  - wget -qO- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/bin/
   - wget -q https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version10.0.0/ffdec_10.0.0.zip -O /tmp/ffdec_10.0.0.zip
   - wget -q https://fpdownload.macromedia.com/get/flashplayer/updaters/25/playerglobal25_0.swc -O /tmp/playerglobal25_0.swc
   - wget -q https://gist.githubusercontent.com/makemek/306ef8e02bb5dd2d21a8e1cfd89cec12/raw/0b50a880c34cfd1b473395b32412f3455d9d4a4f/core-decode.py -O /tmp/core-decode.py
@@ -28,10 +28,10 @@ install:
   - cp -r $TRAVIS_BUILD_DIR/.FFDec ~/
   - cp -r $TRAVIS_BUILD_DIR/.macromedia ~/
   - python /tmp/core-decode.py /tmp/Core.swf /tmp/decoded.swf
-  - java -jar /tmp/ffdec/ffdec.jar -importScript /tmp/decoded.swf $TRAVIS_BUILD_DIR/external/Core.swf $TRAVIS_BUILD_DIR/build/as3-import
+  - java -jar /tmp/ffdec/ffdec.jar -importScript /tmp/decoded.swf $TRAVIS_BUILD_DIR/bin/Core.swf $TRAVIS_BUILD_DIR/build/as3-import
 
 before_script:
-  - ls -al $TRAVIS_BUILD_DIR/external/
+  - ls -al $TRAVIS_BUILD_DIR/bin/
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
