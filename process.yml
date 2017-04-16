@@ -1,0 +1,11 @@
+apps:
+  - name: service-port
+    script: index.js
+    instances: 1
+    exec_mode: cluster
+
+    env:
+      PORT: 5000
+      ETIMEOUT: 5000
+    env_production:
+      NODE_ENV: production
