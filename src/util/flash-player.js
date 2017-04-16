@@ -6,7 +6,7 @@ const debug = require('debug')('modcolle:port')
 const path = require('path')
 const querystring = require('querystring')
 const execFile = require('child_process').execFile
-const defaultPlayer = path.resolve('external', 'flashplayerdebugger')
+const defaultPlayer = path.resolve('bin', 'flashplayerdebugger')
 
 class FlashPlayer {
 

@@ -6,7 +6,7 @@ const seneca = require('seneca')({
   log: 'silent',
   timeout: TIMEOUT
 })
-const apiPort = require('../../api/api-port')
+const apiPort = require('../../src/api/api-port')
 const Promise = require('bluebird')
 const should = require('should')
 

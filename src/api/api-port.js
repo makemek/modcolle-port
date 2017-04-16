@@ -25,7 +25,7 @@ function calculate({memberId, meta$: {id}}, respond) {
 
   const urlCallbackArgs = flashCallback
   urlCallbackArgs.id = id
-  const flash = flashPlayer.execute('external/Core.swf', {
+  const flash = flashPlayer.execute('bin/Core.swf', {
     memberId,
     unixtime: serverTime.now('Asia/Tokyo'),
     callbackUrl: escape(`http://127.0.0.1:${PORT}/act?`) + querystring.stringify(urlCallbackArgs)

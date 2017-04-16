@@ -1,6 +1,6 @@
 apps:
   - name: service-port
-    script: index.js
+    script: src/
     instances: 1
     exec_mode: cluster
 

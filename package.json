@@ -8,8 +8,8 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node src/",
+    "dev": "nodemon src/",
     "eslint": "eslint **/*.js",
     "ftest": "mocha test/ftest/**/*.js",
     "test": "npm run eslint && npm run ftest"
