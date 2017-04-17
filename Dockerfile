@@ -41,7 +41,7 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | te
       $FFDEC_DIR && \
 
     # Install Adobe Flash Player
-    wget -O- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux_debug.x86_64.tar.gz | tar xvz -C $DEPLOY_DIR/bin/ && \
+    wget -O- https://fpdownload.macromedia.com/pub/flashplayer/updaters/25/flash_player_sa_linux.x86_64.tar.gz | tar xvz -C $DEPLOY_DIR/bin/ && \
 
     # Install FFDec
     wget https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version10.0.0/ffdec_10.0.0.zip -O /tmp/ffdec_10.0.0.zip && \
@@ -97,3 +97,4 @@ RUN chmod +x ./build/docker-entrypoint.sh && \
     npm install --only=production
 
 ENTRYPOINT ["./build/docker-entrypoint.sh"]
+CMD ["production"]

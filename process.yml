@@ -12,3 +12,4 @@ apps:
       TIMEZONE: Asia/Tokyo
     env_production:
       NODE_ENV: production
+      FLASH_PLAYER: bin/flashplayer
