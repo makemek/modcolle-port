@@ -1,12 +1,13 @@
 'use strict'
 
 const ETIMEOUT = process.env.ETIMEOUT
+const FLASH_PLAYER = process.env.FLASH_PLAYER
 
 const debug = require('debug')('modcolle:port')
 const path = require('path')
 const querystring = require('querystring')
 const execFile = require('child_process').execFile
-const defaultPlayer = path.resolve('bin', 'flashplayerdebugger')
+const defaultPlayer = path.resolve(FLASH_PLAYER)
 
 class FlashPlayer {
 

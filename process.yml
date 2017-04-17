@@ -7,5 +7,8 @@ apps:
     env:
       PORT: 5000
       ETIMEOUT: 5000
+      KANCOLLE_CORE_SWF: bin/Core.swf
+      FLASH_PLAYER: bin/flashplayerdebugger
+      TIMEZONE: Asia/Tokyo
     env_production:
       NODE_ENV: production

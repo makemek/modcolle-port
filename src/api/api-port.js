@@ -2,6 +2,8 @@
 
 const ETIMEOUT = process.env.ETIMEOUT
 const PORT = process.env.PORT
+const KANCOLLE_CORE_SWF = process.env.KANCOLLE_CORE_SWF
+const TIMEZONE = process.env.TIMEZONE
 
 const debug = require('debug')('modcolle:port')
 const querystring = require('querystring')
@@ -25,9 +27,9 @@ function calculate({memberId, meta$: {id}}, respond) {
 
   const urlCallbackArgs = flashCallback
   urlCallbackArgs.id = id
-  const flash = flashPlayer.execute('bin/Core.swf', {
+  const flash = flashPlayer.execute(KANCOLLE_CORE_SWF, {
     memberId,
-    unixtime: serverTime.now('Asia/Tokyo'),
+    unixtime: serverTime.now(TIMEZONE),
     callbackUrl: escape(`http://127.0.0.1:${PORT}/act?`) + querystring.stringify(urlCallbackArgs)
   })
   flash.stdout.on('data', debug)

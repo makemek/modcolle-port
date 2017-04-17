@@ -38,4 +38,4 @@ before_script:
   - travis_retry npm install
 
 script:
-  - PORT=5000 ETIMEOUT=5000 DEBUG=modcolle:* npm run test
+  - PORT=5000 ETIMEOUT=5000 FLASH_PLAYER=bin/flashplayerdebugger KANCOLLE_CORE_SWF=bin/Core.swf TIMEZONE=Asia/Tokyo DEBUG=modcolle:* npm run test
