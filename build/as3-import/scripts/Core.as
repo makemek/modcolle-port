@@ -26,21 +26,9 @@ package
 
       private function parseFlashvars() : void
       {
-         var memberStr:String = null;
-         if(loaderInfo.loaderURL.match(/^file:/))
-         {
-            memberStr = stage.loaderInfo.parameters.memberId;
-            this.unixtime = parseInt(stage.loaderInfo.parameters.unixtime);
-            this.callback = stage.loaderInfo.parameters.callbackUrl;
-         }
-         else
-         {
-            memberStr = root.loaderInfo.parameters.memberId;
-            this.unixtime = parseInt(root.loaderInfo.parameters.unixtime);
-            this.callback = root.loaderInfo.parameters.callbackUrl;
-         }
-         this.callback = unescape(unescape(this.callback));
-         this.member = parseInt(memberStr);
+         this.member = parseInt(stage.loaderInfo.parameters.memberId);
+         this.unixtime = parseInt(stage.loaderInfo.parameters.unixtime);
+         this.callback = unescape(unescape(stage.loaderInfo.parameters.callbackUrl));
       }
 
       private function _createKey(port:PortAPI) : Object
