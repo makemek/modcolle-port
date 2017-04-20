@@ -28,6 +28,23 @@ Then, run the image expose port 5000
 ```
 docker run -d -p 5000:5000 --name modcolle-port port
 ```
+_[optional]_ Run `bin/` folder as a ramdisk.
+Bacause Flash Player and Core.swf are likely to be opened often.
+They should be put in RAM for faster access.
+Apply `--tmpfs` to mount as ramdisk and pass environment variable `RAMDISK` to the container.
+Modcolle will copy `bin/` folder to `$RAMDISK` inside the container before launch.
+```
+RAM=/mnt/ramdisk
+docker run \
+  -d \
+  -p 5000:5000 \
+  --name modcolle-port \
+  --tmpfs $RAM:size=32M \
+  -e RAMDISK=$RAM \
+  -e KANCOLLE_CORE_SWF=$RAM/bin/Core.swf \
+  -e FLASH_PLAYER=$RAM/bin/flashplayer \
+  port
+```
 Let's call its API. In the browser type
 ```
 http://localhost:5000/act?role=api_port&cmd=calculate&memberId=123456
